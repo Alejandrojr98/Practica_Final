@@ -20,11 +20,11 @@ public class Usuario {
 //    private int id_arch;
 
     @OneToOne(cascade = CascadeType.ALL, orphanRemoval = true) // cascada para operaciones de persistencia
-    @JoinColumn(name = "id_img", referencedColumnName = "id_imagen")
+    @JoinColumn(name = "id_imagen", referencedColumnName = "id_imagen")
     private Imagen imagen;
 
     @OneToOne(cascade = CascadeType.ALL, orphanRemoval = true) // cascada para operaciones de persistencia
-    @JoinColumn(name = "id_arch", referencedColumnName = "id_archivo")
+    @JoinColumn(name = "id_archivo", referencedColumnName = "id_archivo")
     private Archivo archivo;
 
     public int getIdUsuario() {
