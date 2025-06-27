@@ -2,26 +2,26 @@ FROM ubuntu:latest
 LABEL authors="IDS"
 
 ENTRYPOINT ["top", "-b"]
-# Etapa de construcción
+# Etapa de construcción 
 
-FROM maven:3.8.5-openjdk-17 AS build
+FROM maven:3.8.5-openjdk-17 AS build 
 
-WORKDIR /app
+WORKDIR /app 
 
-COPY . .
+COPY . . 
 
-RUN mvn clean package -DskipTests
+RUN mvn clean package -DskipTests 
 
+ 
 
+# Etapa de ejecución 
 
-# Etapa de ejecución
+FROM openjdk:17-jdk-slim 
 
-FROM openjdk:17-jdk-slim
+WORKDIR /app 
 
-WORKDIR /app
+COPY --from=build /app/target/*.jar app.jar 
 
-COPY --from=build /app/target/*.jar app.jar
-
-EXPOSE 8080
+EXPOSE 8080 
 
 ENTRYPOINT ["java", "-jar", "app.jar"]
