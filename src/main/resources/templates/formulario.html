@@ -9,6 +9,7 @@
     <link rel="stylesheet" href="/css/style.css">
 </head>
 <body>
+<header th:insert="~{fragments/header::header}"></header>
 <div class="container align-items-center">
     <h1 class="text-center" th:text="${usuario.getIdUsuario()==0?'Nuevo Usuario':'Editar Usuario'}"></h1>
     <h1>Formulario Usuario</h1>
@@ -133,8 +134,8 @@
 <!--            </div>-->
 <!--        </div>-->
         <div class="col-12">
-            <button class="btn btn-primary" type="submit">Enviar Datos</button>
-            <button class="btn btn-primary" type="reset">Limpiar</button>
+            <button class="btn btn_color" type="submit">Enviar Datos</button>
+            <button class="btn btn_color" type="reset">Limpiar</button>
         </div>
     </form>
 </div>
@@ -144,7 +145,7 @@
         <div class="col-md-4">
             <label for="validationCustom10" class="form-label">Imagen</label>
             <input type="file" name="imagen" id="validationCustom10">
-            <button class="btn btn-primary" type="submit">Guardar IMG</button>
+            <button class="btn btn_color" type="submit">Guardar IMG</button>
             <div class="valid-feedback">
                 Correcto
             </div>
@@ -160,7 +161,7 @@
         <div class="col-md-4">
             <label for="validationCustom11" class="form-label">Archivo</label>
             <input type="file" name="archivo" id="validationCustom11">
-            <button class="btn btn-primary" type="submit">Guardar DOC</button>
+            <button class="btn btn_color" type="submit">Guardar DOC</button>
             <div class="valid-feedback">
                 Correcto
             </div>

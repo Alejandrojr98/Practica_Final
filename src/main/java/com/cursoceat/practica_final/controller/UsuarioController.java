@@ -2,11 +2,14 @@ package com.cursoceat.practica_final.controller;
 
 import com.cursoceat.practica_final.modell.Archivo;
 import com.cursoceat.practica_final.modell.Imagen;
+import com.cursoceat.practica_final.modell.Llamada;
 import com.cursoceat.practica_final.modell.Usuario;
 import com.cursoceat.practica_final.repository.ArchivoRepository;
 import com.cursoceat.practica_final.repository.ImagenRepository;
+import com.cursoceat.practica_final.repository.LlamadaRepository;
 import com.cursoceat.practica_final.repository.UsuarioRepository;
 import com.cursoceat.practica_final.service.ArchivoServicio;
+import com.cursoceat.practica_final.service.LlamadaServicio;
 import com.cursoceat.practica_final.service.UsuarioServicio;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpHeaders;
@@ -34,21 +37,35 @@ public class UsuarioController {
     private final ArchivoRepository archivoRepository;
 
     @Autowired
+    private final LlamadaRepository llamadaRepository;
+
+    @Autowired
     private UsuarioServicio usuarioServicio;
 
     @Autowired
     private ArchivoServicio archivoServicio;
 
-    public UsuarioController(UsuarioRepository usuarioRepository, ImagenRepository imagenRepository, ArchivoRepository archivoRepository) {
+    @Autowired
+    private LlamadaServicio llamadaServicio;
+
+    public UsuarioController(UsuarioRepository usuarioRepository, ImagenRepository imagenRepository, ArchivoRepository archivoRepository, LlamadaRepository llamadaRepository) {
         this.usuarioRepository = usuarioRepository;
         this.imagenRepository = imagenRepository;
         this.archivoRepository = archivoRepository;
+        this.llamadaRepository = llamadaRepository;
     }
 
+//    @GetMapping("/")
+//    public String inicio() {
+//        return "index";
+//    }
+
     @GetMapping("/")
-    public String inicio() {
+    public String inicio(Model model) {
+        model.addAttribute("llamadas", llamadaRepository.findAll());
         return "index";
     }
+
     @GetMapping("/listado_usuarios")
     public String listadoUsuario(Model model) {
         model.addAttribute("usuarios", usuarioRepository.findAll());
@@ -64,6 +81,20 @@ public class UsuarioController {
 //        model.addAttribute("archivos", new Archivo());
         listaCargoUsuarios(model);
         return "formulario";
+    }
+
+    @GetMapping("/nuevaLlamada")
+    public String nuevaLamada(Model model) {
+        model.addAttribute("llamada", new Llamada());
+//        model.addAttribute("imagenes", new Imagen());
+//        model.addAttribute("archivos", new Archivo());
+//        listaCargoUsuarios(model);
+        listaEstado(model);
+        listaPrescripcion(model);
+        listaMetales(model);
+        listaTatuajes(model);
+        listaOperadas(model);
+        return "formulario_llamadas";
     }
 
 //    @PostMapping("/guardar")
@@ -97,6 +128,12 @@ public class UsuarioController {
     public String guardarUsuario(@ModelAttribute Usuario usuario){
         usuarioRepository.save(usuario);
         return "redirect:/listado_usuarios";
+    }
+
+    @PostMapping("/guardarLlamada")
+    public String guardarLlamada(@ModelAttribute Llamada llamada){
+        llamadaRepository.save(llamada);
+        return "redirect:/";
     }
 
     @PostMapping("/guardarIMG")
@@ -140,6 +177,12 @@ public class UsuarioController {
         return "redirect:/listado_usuarios";
     }
 
+    @GetMapping("/eliminarLlamada/{id}")
+    public String eliminarLlamada(@PathVariable("id") int idLla) {
+        llamadaRepository.deleteById(idLla);
+        return "redirect:/";
+    }
+
 //    @GetMapping("/eliminar/{id}")
 //    public String eliminarEmpleado(@PathVariable("id") int idUsu) {
 //        Usuario usuario = usuarioRepository.findById(idUsu).orElse(null);
@@ -161,6 +204,18 @@ public class UsuarioController {
         listaCargoUsuarios(model);
         model.addAttribute("usuario", usuario);
         return "formulario";
+    }
+
+    @GetMapping("/editarLlamada/{id}")
+    public String editarLlamada(@PathVariable("id") int idLla, Model model) {
+        Llamada llamada = llamadaRepository.findById(idLla).orElse(null);
+        listaEstado(model);
+        listaPrescripcion(model);
+        listaMetales(model);
+        listaTatuajes(model);
+        listaOperadas(model);
+        model.addAttribute("llamada", llamada);
+        return "formulario_llamadas";
     }
 
 //    @GetMapping("/editar/{id}/{id_img}")
@@ -220,5 +275,45 @@ public class UsuarioController {
         model.addAttribute("puestoEmpleado", puestoEmpleado);
         model.addAttribute("imagenes", imagenRepository.findAll());
         model.addAttribute("archivos", archivoRepository.findAll());
+    }
+
+    public void listaEstado(Model model) {
+        ArrayList<String> estado = new ArrayList<>();
+        estado.add("");
+        estado.add("Pendiente");
+        estado.add("Resuelto");
+        model.addAttribute("estado", estado);
+    }
+
+    public void listaPrescripcion(Model model) {
+        ArrayList<String> prescripcion = new ArrayList<>();
+        prescripcion.add("");
+        prescripcion.add("SI");
+        prescripcion.add("NO");
+        model.addAttribute("prescripcion", prescripcion);
+    }
+
+    public void listaMetales(Model model) {
+        ArrayList<String> metales = new ArrayList<>();
+        metales.add("");
+        metales.add("SI");
+        metales.add("NO");
+        model.addAttribute("metales", metales);
+    }
+
+    public void listaTatuajes(Model model) {
+        ArrayList<String> tatuajes = new ArrayList<>();
+        tatuajes.add("");
+        tatuajes.add("SI");
+        tatuajes.add("NO");
+        model.addAttribute("tatuajes", tatuajes);
+    }
+
+    public void listaOperadas(Model model) {
+        ArrayList<String> operada = new ArrayList<>();
+        operada.add("");
+        operada.add("SI");
+        operada.add("NO");
+        model.addAttribute("operada", operada);
     }
 }

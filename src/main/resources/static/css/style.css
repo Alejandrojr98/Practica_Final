@@ -1,9 +1,13 @@
 body{
-    background-color: #DDD0C8;
+    background-color: white;
 }
 
 h1{
-    color: #323232;
+    color: #08af9f;
+}
+
+.navbar-nav .nav-link{
+    color: #08af9f;
 }
 
 .table {
@@ -33,16 +37,50 @@ h1{
 }
 
 .table tr:nth-child(odd) td{
-    background-color: #8C7561 ;
-    color:white;
+    background-color: white ;
+    color:black;
 }
 
 .table tr:nth-child(even) td{
-    background-color: #A69485;
-    color: white;
+    background-color: #F6F6F6;
+    color: black;
 }
 
 .table tr th{
-    background-color: #8C5332;
+    background-color: #08af9f;
     color:white;
+}
+
+.btn_color{
+    background-color: #EFB300;
+    color: white;
+}
+
+.btn:hover {
+    background-color: #08af9f;
+    color: white;
+}
+
+.fondo_footer{
+    background-color: #808080;
+    padding-top: 15px;
+    padding-bottom: 15px;
+}
+
+p{
+    color: white;
+    margin: 15px 15px 0px 15px;
+}
+
+footer{
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+    height: 2.5rem;
+    top:870px;
+}
+
+#page-container {
+    position: relative;
+    min-height: 100vh;
 }

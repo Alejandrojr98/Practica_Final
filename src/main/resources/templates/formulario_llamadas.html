@@ -1,0 +1,201 @@
+<!doctype html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Formulario Llamada</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.6/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-4Q6Gf2aSP4eDXB8Miphtr37CMZZQ5oXLH2yaXMJ2w8e2ZtHTl7GptT4jmndRuHDT" crossorigin="anonymous">
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.6/dist/js/bootstrap.bundle.min.js" integrity="sha384-j1CDi7MgGQ12Z7Qab0qlWQ/Qqz24Gc6BM0thvEMVjHnfYGF0rmFCozFSxQBxwHKO" crossorigin="anonymous"></script>
+  <link rel="stylesheet" href="/css/style.css">
+  <link rel="icon" type="image/x-icon" href="/img/favicon.ico">
+</head>
+<body>
+<header th:insert="~{fragments/header::header}"></header>
+<div class="container align-items-center" id="page-container">
+  <h1 class="text-center" th:text="${llamada.getIdLlamada()==0?'Nueva Llamada':'Editar Llamada'}"></h1>
+  <h1>Formulario Llamada</h1>
+  <form class="row g-3 needs-validation" novalidate th:action="@{/guardarLlamada}" th:object="${llamada}" method="post" enctype="multipart/form-data">
+    <input type="hidden" name="id" th:field="*{idLlamada}">
+    <!--        <input type="hidden" name="id_imagen" th:field="*{imagen.idImagen}">-->
+    <!--        <input type="hidden" name="id_archivo" th:field="*{archivo.idArchivo}">-->
+    <div class="col-md-6">
+      <label for="validationCustom01" class="form-label">Fecha Llamada</label>
+      <input type="date" class="form-control" id="validationCustom01" required th:field="*{fecha_llamada}">
+      <div class="valid-feedback">
+        Correcto
+      </div>
+      <div class="invalid-feedback">
+        Introduce la fecha de llamada.
+      </div>
+    </div>
+    <div class="col-md-6">
+      <label for="validationCustom02" class="form-label">Estado</label>
+      <select class="form-select" id="validationCustom02" required th:field="*{estado}">
+        <option th:each="e:${estado}" th:value="${e}" th:text="${e}"></option>
+      </select>
+      <div class="valid-feedback">
+        Buen trabajo.
+      </div>
+      <div class="invalid-feedback">
+        Selecciona el estado.
+      </div>
+    </div>
+    <div class="col-md-6">
+      <label for="validationCustom03" class="form-label">Tipo de servicio</label>
+      <input type="text" class="form-control" id="validationCustom03" required th:field="*{tipo_servicio}">
+      <div class="valid-feedback">
+        Correcto
+      </div>
+      <div class="invalid-feedback">
+        Introduce el servicio.
+      </div>
+    </div>
+    <div class="col-md-6">
+      <label for="validationCustom04" class="form-label">Localidad</label>
+      <input type="text" class="form-control" id="validationCustom04" required th:field="*{localidad}">
+      <div class="valid-feedback">
+        Correcto
+      </div>
+      <div class="invalid-feedback">
+        Introduce la localidad.
+      </div>
+    </div>
+    <div class="col-md-6">
+      <label for="validationCustom05" class="form-label">Disp. cliente</label>
+      <input type="text" class="form-control" id="validationCustom05" required th:field="*{disponibilidad_cliente}">
+      <div class="valid-feedback">
+        Correcto
+      </div>
+      <div class="invalid-feedback">
+        Introduce la disponibilidad.
+      </div>
+    </div>
+    <div class="col-md-6">
+      <label for="validationCustom06" class="form-label">Disp. centro</label>
+      <input type="text" class="form-control" id="validationCustom06" th:field="*{disponibilidad_centro}">
+      <div class="valid-feedback">
+        Correcto
+      </div>
+      <div class="invalid-feedback">
+        Introduce la disponibilidad del centro.
+      </div>
+    </div>
+    <div class="col-md-6">
+      <label for="validationCustom07" class="form-label">Prescripción</label>
+      <select class="form-select" id="validationCustom07" th:field="*{prescripcion}">
+        <option th:each="p:${prescripcion}" th:value="${p}" th:text="${p}"></option>
+      </select>
+      <div class="valid-feedback">
+        Buen trabajo.
+      </div>
+      <div class="invalid-feedback">
+        Selecciona si tiene prescripcion.
+      </div>
+    </div>
+    <div class="col-md-6">
+      <label for="validationCustom08" class="form-label">Metales</label>
+      <select class="form-select" id="validationCustom08" th:field="*{metales}">
+        <option th:each="m:${metales}" th:value="${m}" th:text="${m}"></option>
+      </select>
+      <div class="valid-feedback">
+        Buen trabajo.
+      </div>
+      <div class="invalid-feedback">
+        Selecciona si tiene metales.
+      </div>
+    </div>
+    <div class="col-md-6">
+      <label for="validationCustom09" class="form-label">Tatuajes recientes</label>
+      <select class="form-select" id="validationCustom09" th:field="*{tatuajes}">
+        <option th:each="t:${tatuajes}" th:value="${t}" th:text="${t}"></option>
+      </select>
+      <div class="valid-feedback">
+        Buen trabajo.
+      </div>
+      <div class="invalid-feedback">
+        Selecciona si tiene tatuajes.
+      </div>
+    </div>
+    <div class="col-md-6">
+      <label for="validationCustom10" class="form-label">Zona prueba</label>
+      <input type="text" class="form-control" id="validationCustom10" th:field="*{zona_prueba}">
+      <div class="valid-feedback">
+        Correcto
+      </div>
+      <div class="invalid-feedback">
+        Introduce la zona de la prueba.
+      </div>
+    </div>
+    <div class="col-md-6">
+      <label for="validationCustom11" class="form-label">Operada de la zona</label>
+      <select class="form-select" id="validationCustom11" th:field="*{zona_operada}">
+        <option th:each="o:${operada}" th:value="${o}" th:text="${o}"></option>
+      </select>
+      <div class="valid-feedback">
+        Buen trabajo.
+      </div>
+      <div class="invalid-feedback">
+        Selecciona si tiene operada la zona.
+      </div>
+    </div>
+    <div class="col-md-6">
+      <label for="validationCustom12" class="form-label">Teléfono cliente</label>
+      <input type="text" class="form-control" id="validationCustom12" th:field="*{telefono_cliente}" maxlength="9">
+      <div class="valid-feedback">
+        Correcto
+      </div>
+      <div class="invalid-feedback">
+        Introduce el teléfono.
+      </div>
+    </div>
+    <div class="col-md-6">
+      <label for="validationCustom14" class="form-label">Fecha Cita</label>
+      <input type="datetime-local" class="form-control" id="validationCustom14" th:field="*{cita}">
+      <div class="valid-feedback">
+        Correcto
+      </div>
+      <div class="invalid-feedback">
+        Introduce la fecha de la cita.
+      </div>
+    </div>
+    <div class="col-12">
+      <button class="btn btn_color" type="submit">Enviar Datos</button>
+      <button class="btn btn_color" type="reset">Limpiar</button>
+    </div>
+  </form>
+</div>
+<!--<div class="container align-items-center">-->
+<!--  <h1>Insertar documentos</h1>-->
+<!--  <form class="row g-3 needs-validation" novalidate th:action="@{/guardarArchivo}" method="post" enctype="multipart/form-data">-->
+<!--    <div class="col-md-4">-->
+<!--      <label for="validationCustom11" class="form-label">Archivo</label>-->
+<!--      <input type="file" name="archivo" id="validationCustom11">-->
+<!--      <button class="btn btn_color" type="submit">Guardar DOC</button>-->
+<!--      <div class="valid-feedback">-->
+<!--        Correcto-->
+<!--      </div>-->
+<!--      <div class="invalid-feedback">-->
+<!--        Introduce el archivo.-->
+<!--      </div>-->
+<!--    </div>-->
+<!--  </form>-->
+<!--</div>-->
+<footer th:insert="~{fragments/footer::footer}"></footer>
+<script>
+  (() => {
+    'use strict'
+    const forms = document.querySelectorAll('.needs-validation')
+    Array.from(forms).forEach(form => {
+      form.addEventListener('submit', event => {
+        if (!form.checkValidity()) {
+          event.preventDefault()
+          event.stopPropagation()
+        }
+
+        form.classList.add('was-validated')
+      }, false)
+    })
+  })()
+</script>
+</body>
+</html>
