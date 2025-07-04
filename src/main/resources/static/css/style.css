@@ -15,25 +15,43 @@ h1{
     /*max-width: 900px;*/
     border-collapse: collapse;
     margin-bottom: 40px;
-    background-color: #1e1e1e;
+    /*background-color: #1e1e1e;*/
     border-radius: 12px;
     overflow: hidden;
-    box-shadow: 0 0 20px rgba(255, 76, 76, 0.2);
+    box-shadow: 0 0 1000px rgba(255, 76, 76, 0.2);
+    /*max-width: 100%;*/
+    /*table-layout: fixed;*/
+    /*word-wrap: break-word;*/
+    /*overflow-wrap: break-word;*/
 }
 
 .th, .td {
     padding: 15px 20px;
-    border-bottom: 1px solid #2c2c2c;
+    border-bottom: 1px solid #ddd;
 }
 
-.th {
-    background-color: #ff4c4c;
-    color: white;
-    text-shadow: 0 0 5px #fff;
+td {
+    word-break: break-word;
+    white-space: normal;
 }
 
-.tr:hover {
-    background-color: #2c2c2c;
+.td_ancho100{
+    width: 100px;
+}
+
+.td_ancho50{
+    width: 50px;
+}
+
+/*.th {*/
+/*    background-color: #ff4c4c;*/
+/*    color: white;*/
+/*    text-shadow: 0 0 5px #fff;*/
+/*}*/
+
+#miTabla .tr_fila:hover td{
+    background-color: #d5d8dc;
+    color:black;
 }
 
 .table tr:nth-child(odd) td{
@@ -56,15 +74,21 @@ h1{
     color: white;
 }
 
-.btn:hover {
+.btn_color:hover {
     background-color: #08af9f;
     color: white;
 }
+
+/*.btn:hover {*/
+/*    background-color: #08af9f;*/
+/*    color: white;*/
+/*}*/
 
 .fondo_footer{
     background-color: #808080;
     padding-top: 15px;
     padding-bottom: 15px;
+    margin-top:40px;
 }
 
 p{
@@ -83,4 +107,9 @@ footer{
 #page-container {
     position: relative;
     min-height: 100vh;
+}
+
+.buscador{
+    margin: 15px;
+    width: 20%;
 }
